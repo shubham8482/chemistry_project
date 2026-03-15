@@ -1,0 +1,441 @@
+/* Home.css */
+
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #050508;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   PHASE 3 & 4: Hero Section & Parallax Styling
+   ========================================= */
+.hero-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Cursor hint for interactability */
+  cursor: crosshair; 
+}
+
+.parallax-layer {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%; /* Slightly larger to hide edges during translation */
+  height: 110%;
+  background-size: cover;
+  background-position: center;
+  /* Smooth out the parallax slightly so it doesn't instantly snap */
+  transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* The core zoom illusion */
+  transform-origin: center center;
+}
+
+/* Let's define the visual depths using placeholder images/gradients that feel like "zooming in" */
+
+/* Deep space / Ambient environment */
+.layer-1-background {
+  z-index: 1;
+  background-image: radial-gradient(circle at 50% 50%, #151525 0%, #030305 100%), url('https://images.unsplash.com/photo-1534796636918-f29f009965a3?q=80&w=2000&auto=format&fit=crop');
+  background-blend-mode: overlay;
+  opacity: 0.6;
+}
+
+/* Abstract Macro object (Sleek Tech) */
+.layer-2-macro {
+  z-index: 2;
+  background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop');
+  opacity: 0.2;
+  mix-blend-mode: screen;
+}
+
+/* Abstract Micro / Circuits */
+.layer-3-micro {
+  z-index: 3;
+  background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop');
+  opacity: 0.3;
+  mix-blend-mode: color-dodge;
+  filter: hue-rotate(90deg) contrast(1.5);
+}
+
+/* The Atomic/Quantum level glowing overlay */
+.layer-4-atomic {
+  z-index: 4;
+  background: radial-gradient(circle at center, transparent 30%, rgba(99, 102, 241, 0.1) 60%, rgba(0,0,0,0.8) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Floating Particles in Atomic Layer */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8), 0 0 20px 5px rgba(99, 102, 241, 0.6);
+  animation: floatParticle 8s infinite alternate ease-in-out;
+  opacity: 0.7;
+}
+
+.p1 { top: 30%; left: 40%; animation-delay: 0s; }
+.p2 { top: 60%; left: 70%; animation-delay: -2s; width: 6px; height: 6px; }
+.p3 { top: 80%; left: 20%; animation-delay: -4s; background: #60a5fa; }
+.p4 { top: 20%; left: 80%; animation-delay: -1s; }
+.p5 { top: 50%; left: 50%; animation-delay: -3s; width: 8px; height: 8px; box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.9), 0 0 40px 10px rgba(168, 85, 247, 0.8); }
+
+@keyframes floatParticle {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -40px) scale(1.5); opacity: 1; }
+  100% { transform: translate(-20px, 20px) scale(0.8); }
+}
+
+/* Typography & Text Overlay Container */
+.text-overlay {
+  z-index: 10;
+  pointer-events: none; /* Phase 3: Critical for allowing mouse events to hit the parent container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+  padding: 2rem;
+  /* Glassmorphism drop shadow to make it pop off the busy background */
+  text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+}
+
+.headline {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  /* Phase 3: Typography */
+  font-family: 'Inter', system-ui, sans-serif;
+  text-transform: uppercase;
+}
+
+.highlight-text {
+  display: inline-block;
+  background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0px 0px 8px rgba(99, 102, 241, 0.4));
+  /* A slight pulsing animation for the highlight */
+  animation: pulseGlow 4s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { filter: drop-shadow(0px 0px 8px rgba(99, 102, 241, 0.4)); }
+  100% { filter: drop-shadow(0px 0px 20px rgba(99, 102, 241, 0.8)); }
+}
+
+.subheadline {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: #a1a1aa;
+  font-weight: 400;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.hero-cta {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  text-shadow: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 60px rgba(99, 102, 241, 0.15);
+  animation: ctaPulse 3s infinite ease-in-out;
+}
+
+.hero-cta:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.6), 0 0 80px rgba(99, 102, 241, 0.25);
+}
+
+.hero-cta:active {
+  transform: scale(0.97);
+}
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 60px rgba(99, 102, 241, 0.15); }
+  50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.5), 0 0 80px rgba(168, 85, 247, 0.2); }
+}
+
+.step-check {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #34d399;
+  z-index: 3;
+  filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.6));
+  animation: checkPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+.mouse {
+    width: 24px;
+    height: 38px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 12px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: white;
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 2s infinite cubic-bezier(0.15, 0.41, 0.69, 0.94);
+}
+
+@keyframes scrollWheel {
+    0% { top: 6px; opacity: 1; }
+    50% { top: 18px; opacity: 0; }
+    100% { top: 6px; opacity: 0; }
+}
+
+
+/* =========================================
+   PHASE 5: Navigation Portals Styling
+   ========================================= */
+.portals-section {
+  padding: 6rem 2rem;
+  background: #050508; /* Solid background to anchor the bottom */
+  position: relative;
+  z-index: 20;
+}
+
+.portals-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 4rem;
+  color: white;
+  text-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+.portals-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+/* Phase 5: The Micro-Interactions (Reaction Cards) */
+.portal-card {
+  background: rgba(20, 20, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(10px);
+  flex: 1;
+  min-width: 260px;
+  max-width: 320px;
+}
+
+/* Step Badge */
+.step-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #a1a1aa;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  z-index: 3;
+}
+
+.portal-card:hover .step-badge {
+  color: #fff;
+  background: rgba(255,255,255,0.12);
+}
+
+/* Journey Arrow */
+.journey-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3f3f46;
+  flex-shrink: 0;
+  animation: pulseArrow 2s infinite ease-in-out;
+}
+
+@keyframes pulseArrow {
+  0%, 100% { opacity: 0.3; transform: translateX(0); }
+  50% { opacity: 0.8; transform: translateX(4px); }
+}
+
+/* Default state - faint glow */
+.portal-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 2px;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.4s;
+}
+
+/* Hover State Effects */
+.portal-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(30, 30, 45, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.portal-card:hover .reaction-glow {
+  opacity: 1;
+  transform: scale(2);
+}
+
+.portal-card:hover .portal-icon {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 15px currentColor);
+}
+
+/* The Fizzing Particles that appear on hover */
+.fizzing-particles {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  background-image: 
+    radial-gradient(circle, currentColor 1px, transparent 1px),
+    radial-gradient(circle, currentColor 1.5px, transparent 1.5px);
+  background-size: 20px 20px, 30px 30px;
+  background-position: 0 0, 15px 15px;
+  transition: opacity 0.3s ease;
+}
+
+.portal-card:hover .fizzing-particles {
+  opacity: 0.15;
+  animation: bubbleRise 2s linear infinite;
+}
+
+/* Specific theme colors for the cards */
+.reaction-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.reaction-glow.indigo { background: rgba(99, 102, 241, 0.6); }
+.reaction-glow.emerald { background: rgba(52, 211, 153, 0.6); }
+.reaction-glow.purple { background: rgba(168, 85, 247, 0.6); }
+
+/* Typography inside cards */
+.portal-icon-container {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  z-index: 2;
+}
+
+.portal-icon {
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.portal-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.portal-desc {
+  color: #a1a1aa;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes bubbleRise {
+  0% { transform: translateY(10%); }
+  100% { transform: translateY(-30%); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .headline { font-size: 2.5rem; }
+  .portals-section { padding: 4rem 1rem; }
+  .portals-grid { flex-direction: column; align-items: center; }
+  .journey-arrow { transform: rotate(90deg); }
+  .portal-card { max-width: 100%; }
+}
+
